@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TheMrTechGuy.com – TMTCo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       🎨 DESIGN TOKENS — Edit colours, fonts & spacing here
+       ============================================================ */
+    :root {
+      --bg:         #0b0e14;
+      --surface:    #12161f;
+      --surface2:   #1a1f2e;
+      --border:     #242938;
+      --accent:     #3b82f6;
+      --accent2:    #60a5fa;
+      --text:       #e8eaf0;
+      --muted:      #8892a4;
+      --heading:    'Syne', sans-serif;
+      --body:       'DM Sans', sans-serif;
+      --radius:     14px;
+      --transition: 0.25s cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--body); background: var(--bg); color: var(--text); line-height: 1.65; min-height: 100vh; }
+    a { color: var(--accent2); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: #fff; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(11,14,20,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem; height: 64px;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .nav-logo {
+      font-family: var(--heading); font-weight: 800; font-size: 1.15rem;
+      letter-spacing: -0.02em; color: #fff;
+      display: flex; align-items: center; gap: .55rem; cursor: pointer;
+    }
+    .nav-logo .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+    .nav-links a { font-size: .88rem; font-weight: 500; color: var(--muted); transition: color var(--transition); cursor: pointer; }
+    .nav-links a:hover { color: var(--text); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+      opacity: .45;
+    }
+    .hero::after {
+      content: ''; position: absolute; top: 20%; left: 50%; transform: translate(-50%,-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(59,130,246,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.3);
+      border-radius: 100px; padding: .3rem .85rem;
+      font-size: .78rem; font-weight: 500; color: var(--accent2); letter-spacing: .04em;
+      margin-bottom: 1.6rem; position: relative; animation: fadeUp .6s .1s both;
+    }
+    .hero h1 {
+      font-family: var(--heading); font-size: clamp(2.6rem, 6vw, 5rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; color: #fff;
+      position: relative; animation: fadeUp .6s .2s both;
+    }
+    .hero h1 span { color: var(--accent2); }
+    .hero > p { max-width: 520px; color: var(--muted); font-size: 1.05rem; margin: 1.4rem auto 0; position: relative; animation: fadeUp .6s .35s both; }
+    .hero-ctas { display: flex; gap: 1rem; margin-top: 2.4rem; flex-wrap: wrap; justify-content: center; position: relative; animation: fadeUp .6s .45s both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── BUTTONS ── */
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.5rem; border-radius: 10px; font-size: .9rem; font-weight: 500; cursor: pointer; transition: all var(--transition); border: none; font-family: var(--body); text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent2); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,.35); }
+    .btn-ghost { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent2); transform: translateY(-2px); }
+
+    /* ── SECTIONS ── */
+    .page-section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .page-section.top { padding-top: 8rem; }
+    .section-label { font-size: .78rem; font-weight: 600; letter-spacing: .1em; color: var(--accent); text-transform: uppercase; margin-bottom: .7rem; }
+    .section-title { font-family: var(--heading); font-size: clamp(1.7rem, 3vw, 2.5rem); font-weight: 700; letter-spacing: -0.02em; color: #fff; margin-bottom: 1rem; }
+    .section-sub { color: var(--muted); max-width: 560px; font-size: .97rem; }
+    .section-header { margin-bottom: 3rem; }
+
+    /* ── CARDS ── */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: all var(--transition); position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(59,130,246,.06), transparent 60%); opacity: 0; transition: opacity var(--transition); }
+    .card:hover { border-color: rgba(59,130,246,.4); transform: translateY(-4px); }
+    .card:hover::before { opacity: 1; }
+    .card-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(59,130,246,.12); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.2rem; }
+    .card h3 { font-family: var(--heading); font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
+    .card p { color: var(--muted); font-size: .9rem; line-height: 1.6; }
+    .card a { display: inline-block; margin-top: 1rem; font-size: .85rem; font-weight: 500; cursor: pointer; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .about-text p { color: var(--muted); margin-top: 1rem; font-size: .97rem; }
+    .about-placeholder { background: var(--surface2); height: 280px; display: flex; align-items: center; justify-content: center; font-size: 4rem; border-radius: var(--radius); border: 1px solid var(--border); }
+    .resume-box { margin-top: 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .resume-box p { color: var(--muted); font-size: .9rem; }
+    .resume-box strong { color: var(--text); display: block; font-size: 1rem; margin-bottom: .25rem; }
+
+    /* ── CONTACT ── */
+    .contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .contact-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1rem; transition: border-color var(--transition); }
+    .contact-item:hover { border-color: rgba(59,130,246,.4); }
+    .contact-item-icon { width: 40px; height: 40px; flex-shrink: 0; border-radius: 8px; background: rgba(59,130,246,.12); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .contact-item span { font-size: .78rem; color: var(--muted); display: block; }
+    .contact-item strong { font-size: .92rem; color: var(--text); }
+
+    /* ── TOS ── */
+    .tos-body { max-width: 760px; }
+    .tos-intro { color: var(--muted); font-size: .97rem; margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .tos-clause { margin-bottom: 2rem; }
+    .tos-clause h3 { font-family: var(--heading); font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: .6rem; display: flex; align-items: center; gap: .75rem; }
+    .tos-clause-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 6px; background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.2); font-size: .75rem; font-weight: 700; color: var(--accent2); flex-shrink: 0; }
+    .tos-clause p { color: var(--muted); font-size: .92rem; line-height: 1.75; }
+    .tos-note { margin-top: .5rem; padding: .6rem .9rem; background: rgba(59,130,246,.07); border-left: 2px solid var(--accent); border-radius: 0 6px 6px 0; font-size: .85rem; color: var(--muted); }
+    .tos-updated { display: inline-flex; align-items: center; gap: .5rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: .5rem 1rem; font-size: .8rem; color: var(--muted); margin-bottom: 2rem; }
+
+    /* ── ID CALLBACK ── */
+    .idcallback-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 3rem 2rem; text-align: center; max-width: 560px; }
+    .idcallback-placeholder .big-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .idcallback-placeholder h3 { font-family: var(--heading); font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
+    .idcallback-placeholder p { color: var(--muted); font-size: .9rem; }
+
+    /* ── LOGIN WALL ── */
+    #passreset-gate {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(11,14,20,.97); backdrop-filter: blur(16px);
+      display: none; align-items: center; justify-content: center;
+    }
+    #passreset-gate.active { display: flex; }
+    .login-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2.8rem 2.5rem;
+      max-width: 420px; width: 100%; text-align: center;
+      animation: fadeUp .4s both;
+    }
+    .login-box .lock-icon { width: 56px; height: 56px; border-radius: 14px; background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.25); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 1.5rem; }
+    .login-box h2 { font-family: var(--heading); font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
+    .login-box > p { color: var(--muted); font-size: .9rem; margin-bottom: 1.8rem; line-height: 1.6; }
+    .ms-login-btn { display: flex; align-items: center; justify-content: center; gap: .75rem; width: 100%; padding: .85rem 1.5rem; background: #fff; color: #1a1a1a; border: none; border-radius: 10px; font-size: .95rem; font-weight: 500; font-family: var(--body); cursor: pointer; transition: all var(--transition); }
+    .ms-login-btn:hover { background: #f0f0f0; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+    .ms-login-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .ms-login-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+    .login-error { margin-top: 1rem; padding: .75rem 1rem; background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.25); border-radius: 8px; color: #f87171; font-size: .85rem; display: none; }
+    .login-error.visible { display: block; }
+    .login-loading { margin-top: 1rem; color: var(--muted); font-size: .85rem; display: none; }
+    .login-loading.visible { display: block; }
+    .login-note { margin-top: 1.2rem; font-size: .78rem; color: var(--muted); }
+
+    /* ── USER BAR ── */
+    #user-bar { display: flex; align-items: center; justify-content: space-between; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .user-bar-info { display: flex; align-items: center; gap: .75rem; }
+    .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(59,130,246,.15); border: 1px solid rgba(59,130,246,.3); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    #user-display-name { font-size: .85rem; color: var(--text); font-weight: 500; }
+    #user-email { font-size: .78rem; color: var(--muted); }
+
+    /* ── DIVIDER & FOOTER ── */
+    .divider { max-width: 1100px; margin: 0 auto; border: none; border-top: 1px solid var(--border); }
+    footer { max-width: 1100px; margin: 0 auto; padding: 2rem 2rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    footer p { color: var(--muted); font-size: .85rem; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); font-size: .85rem; transition: color var(--transition); cursor: pointer; }
+    .footer-links a:hover { color: var(--text); }
+    .back-row { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+
+    /* ── SECTION VISIBILITY ── */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; gap: 1.2rem; z-index: 99; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; }
+      .resume-box { flex-direction: column; align-items: flex-start; }
+      .login-box { padding: 2rem 1.5rem; margin: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION JAVASCRIPT — runs immediately, no dependencies
+       This must be first so clicks work even if MSAL hasn't loaded
+       ============================================================ -->
+  <script>
+    const VIEWS = ['home', 'tech', 'passreset', 'idcallback', 'tos', 'contact'];
+
+    function _activateView(name) {
+      VIEWS.forEach(function(v) {
+        var el = document.getElementById('view-' + v);
+        if (el) el.classList.toggle('active', v === name);
+      });
+      window.scrollTo(0, 0);
+      var nav = document.getElementById('navLinks');
+      if (nav) nav.classList.remove('open');
+    }
+
+    function showView(name) {
+      if (name === 'passreset') {
+        // Gate — handled by MSAL once it loads
+        var gate = document.getElementById('passreset-gate');
+        if (gate) gate.classList.add('active');
+        // If MSAL already loaded and user is signed in, go straight through
+        if (typeof msalInstance !== 'undefined') {
+          var accounts = msalInstance.getAllAccounts();
+          if (accounts.length > 0) {
+            onLoginSuccess(accounts[0]);
+            return;
+          }
+        }
+        return;
+      }
+      _activateView(name);
+    }
+
+    function toggleMenu() {
+      var nav = document.getElementById('navLinks');
+      if (nav) nav.classList.toggle('open');
+    }
+  </script>
+
+
+  <!-- LOGIN WALL OVERLAY -->
+  <div id="passreset-gate">
+    <div class="login-box">
+      <div class="lock-icon">🔐</div>
+      <h2>Authorised Access Only</h2>
+      <p>This portal is restricted to TMTCo staff and authorised users.<br>Sign in with your organisational account to continue.</p>
+      <button class="ms-login-btn" id="ms-login-btn" onclick="msalLogin()">
+        <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1"  y="1"  width="9" height="9" fill="#f25022"/>
+          <rect x="11" y="1"  width="9" height="9" fill="#7fba00"/>
+          <rect x="1"  y="11" width="9" height="9" fill="#00a4ef"/>
+          <rect x="11" y="11" width="9" height="9" fill="#ffb900"/>
+        </svg>
+        Sign in with Microsoft
+      </button>
+      <div class="login-loading" id="login-loading">Redirecting to Microsoft login...</div>
+      <div class="login-error" id="login-error">Sign-in failed or access denied. Contact admin@themrtechguy.com for help.</div>
+      <p class="login-note">🔒 Secured via Microsoft Entra ID · TMTCo internal use only</p>
+    </div>
+  </div>
+
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo" onclick="showView('home')">
+      <span class="dot"></span>TheMrTechGuy
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a onclick="showView('home')">Home</a></li>
+      <li><a onclick="showView('tech')">Tech Things</a></li>
+      <li><a onclick="showView('passreset')">Cloud Password Reset</a></li>
+      <li><a onclick="showView('idcallback')">ID Callback</a></li>
+      <li><a onclick="showView('tos')">Terms of Service</a></li>
+      <li><a onclick="showView('contact')">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+
+  <!-- ============================================================
+       VIEW: HOME
+       ============================================================ -->
+  <div id="view-home" class="view active">
+
+    <div class="hero">
+      <div class="hero-badge">⚡ Tech Solutions &amp; IT Support</div>
+      <h1>Welcome to<br><span>TheMrTechGuy.com</span></h1>
+      <p>Your go-to hub for IT services, tech resources, and all things technology — backed by TMTCo.</p>
+      <div class="hero-ctas">
+        <a onclick="showView('tech')" class="btn btn-primary">Explore Services</a>
+        <a onclick="showView('contact')" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="page-section">
+      <div class="section-header">
+        <div class="section-label">What we offer</div>
+        <h2 class="section-title">Available Services</h2>
+        <p class="section-sub">A collection of tools, resources, and services available through TheMrTechGuy.com.</p>
+      </div>
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-icon">💻</div>
+          <h3>Tech Things</h3>
+          <p>Resources and downloads curated for tech enthusiasts — including tools like Tiny11 and more.</p>
+          <a onclick="showView('tech')">Explore →</a>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🆔</div>
+          <h3>ID Callback</h3>
+          <p>Quick access to identity callback tools and services provided by TMTCo.</p>
+          <a onclick="showView('idcallback')">Access →</a>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">☁️</div>
+          <h3>Cloud Account Password Reset</h3>
+          <p>Locked out? Use our cloud account password recovery portal to regain access. Authorised users only.</p>
+          <a onclick="showView('passreset')">Go to portal →</a>
+        </div>
+
+        <!-- 🔧 Add more service cards here -->
+
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="page-section">
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="section-label">About</div>
+          <h2 class="section-title">For Hiring &amp; Interviewers</h2>
+          <p>I'm Logan Yeomans, the person behind TheMrTechGuy.com and TMTCo. I'm passionate about technology, IT infrastructure, and building practical solutions.</p>
+          <p>If you're a hiring manager or recruiter, you can grab a copy of my resume below.</p>
+          <div class="resume-box">
+            <div>
+              <strong>Logan Yeomans — Resume</strong>
+              <p>PDF download · Last updated 2025</p>
+            </div>
+            <a class="btn btn-primary" href="https://themrtechguy.com/Logan%20Yeomans%20Resume.pdf" target="_blank">⬇ Download PDF</a>
+          </div>
+        </div>
+        <div class="about-placeholder">👨‍💻</div>
+      </div>
+    </div>
+
+  </div><!-- /view-home -->
+
+
+  <!-- ============================================================
+       VIEW: TECH THINGS
+       🔧 Add more download cards below
+       ============================================================ -->
+  <div id="view-tech" class="view">
+    <div class="page-section top">
+      <div class="section-header">
+        <div class="section-label">Resources</div>
+        <h2 class="section-title">Tech Things</h2>
+        <p class="section-sub">A curated collection of useful software and resources for tech enthusiasts.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🪟</div>
+          <h3>Tiny11</h3>
+          <p>A lightweight build of Windows 11 that runs smoothly on older or lower-spec hardware. Stripped of bloat, designed to just work.</p>
+          <a href="https://archive.org/details/tiny-11-NTDEV/Screenshot_20230203-100010_YouTube.jpg" target="_blank">Download from Archive.org →</a>
+        </div>
+        <!-- 🔧 Add more tech resource cards here -->
+      </div>
+      <div class="back-row"><a onclick="showView('home')" class="btn btn-ghost">← Back to Home</a></div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       VIEW: CLOUD PASSWORD RESET
+       ============================================================ -->
+  <div id="view-passreset" class="view">
+    <div class="page-section top">
+
+      <div id="user-bar">
+        <div class="user-bar-info">
+          <div class="user-avatar">👤</div>
+          <div>
+            <div id="user-display-name">Signed in</div>
+            <div id="user-email"></div>
+          </div>
+        </div>
+        <button class="btn btn-ghost" onclick="msalLogout()" style="font-size:.85rem;padding:.5rem 1rem;">Sign out</button>
+      </div>
+
+      <div class="section-header">
+        <div class="section-label">Authorised Portal</div>
+        <h2 class="section-title">Cloud Account Password Reset</h2>
+        <p class="section-sub">Use the options below to reset or recover a cloud account password. Contact admin if you need further assistance.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🔑</div>
+          <h3>Self-Service Password Reset</h3>
+          <p>Reset your Microsoft 365 / Entra ID account password via the Microsoft SSPR portal.</p>
+          <a href="https://aka.ms/sspr" target="_blank">Open Microsoft SSPR →</a>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>Contact IT Admin</h3>
+          <p>If self-service isn't working, reach out to the TMTCo admin directly for a manual reset.</p>
+          <a href="mailto:admin@themrtechguy.com">Email admin →</a>
+        </div>
+        <!-- 🔧 Add more password reset tools here -->
+      </div>
+      <div class="back-row"><a onclick="showView('home')" class="btn btn-ghost">← Back to Home</a></div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       VIEW: ID CALLBACK
+       🔧 Replace the placeholder below with your content
+       ============================================================ -->
+  <div id="view-idcallback" class="view">
+    <div class="page-section top">
+      <div class="section-header">
+        <div class="section-label">Identity Services</div>
+        <h2 class="section-title">ID Callback</h2>
+        <p class="section-sub">TMTCo identity callback services. Contact admin if you need access or assistance.</p>
+      </div>
+      <div style="display:flex;justify-content:center;">
+        <div class="idcallback-placeholder">
+          <div class="big-icon">🆔</div>
+          <h3>Coming Soon</h3>
+          <p>This page is being set up. In the meantime, reach out to <a href="mailto:admin@themrtechguy.com">admin@themrtechguy.com</a> for identity callback assistance.</p>
+        </div>
+      </div>
+      <div class="back-row"><a onclick="showView('home')" class="btn btn-ghost">← Back to Home</a></div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       VIEW: TERMS OF SERVICE
+       🔧 Edit clauses below — update the date badge when you revise
+       ============================================================ -->
+  <div id="view-tos" class="view">
+    <div class="page-section top">
+      <div class="section-header">
+        <div class="section-label">Legal</div>
+        <h2 class="section-title">Terms of Service</h2>
+        <p class="section-sub">Terms of use for all services hosted on themrtechguy.com and operated by TMTCo.</p>
+      </div>
+      <div class="tos-body">
+        <!-- 🔧 Update this date whenever you revise the TOS -->
+        <div class="tos-updated">📅 Last reviewed: 2025</div>
+        <p class="tos-intro">Welcome to themrtechguy.com. These Terms of Service govern your use of all services provided through this website and associated platforms operated by TMTCo. By accessing or using our services, you agree to be bound by these terms. If you do not agree, please discontinue use of our services immediately.</p>
+
+        <div class="tos-clause">
+          <h3><span class="tos-clause-num">1</span> Acceptance of Terms</h3>
+          <p>By using themrtechguy.com or any associated service, you confirm your acceptance of these Terms and agree to comply with all applicable laws and regulations. These Terms apply to all visitors, users, and anyone else who accesses our services.</p>
+        </div>
+        <div class="tos-clause">
+          <h3><span class="tos-clause-num">2</span> User Accounts and Data</h3>
+          <p>Certain services may require you to create an account or have data associated with you. You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account. You agree to provide accurate and complete information at all times.</p>
+          <div class="tos-note">⚠️ This clause applies only to services that require a user account or store your data — it does not apply to this website itself.</div>
+        </div>
+        <div class="tos-clause">
+          <h3><span class="tos-clause-num">3</span> Data Ownership and Responsibility</h3>
+          <p>You retain ownership of all data, files, and content you upload or submit to any TMTCo service. We do not claim ownership of your data. By using our services, you grant us the right to store and process your data only as necessary to deliver the service. We are committed to taking reasonable measures to protect your data.</p>
+        </div>
+        <div class="tos-clause">
+          <h3><span class="tos-clause-num">4</span> Prohibited Activities</h3>
+          <p>You agree not to use any TMTCo service for illegal or unauthorised purposes. Prohibited activities include but are not limited to: infringing intellectual property rights, distributing malware or malicious content, attempting unauthorised access to systems or data, harassment of other users, and any activity that violates applicable law. We reserve the right to suspend or terminate access for any violation of these terms.</p>
+        </div>
+        <div class="tos-clause">
+          <h3><span class="tos-clause-num">5</span> Account Termination</h3>
+          <p>Violation of these Terms may result in the suspension or termination of your access at our sole discretion. In cases involving stored data, termination may result in loss of access to that data. We recommend maintaining your own backups of any critical data held within TMTCo services.</p>
+        </div>
+        <div class="tos-clause">
+          <h3><span class="tos-clause-num">6</span> Service Availability and Changes</h3>
+          <p>While we strive to provide reliable and continuous service, we cannot guarantee uninterrupted availability. TMTCo reserves the right to modify, suspend, or discontinue any service at any time. We will make reasonable efforts to communicate significant changes in advance where possible.</p>
+        </div>
+        <div class="tos-clause">
+          <h3><span class="tos-clause-num">7</span> Security</h3>
+          <p>We implement reasonable security measures to protect data handled by TMTCo services. However, no system is entirely immune to risk. You acknowledge the inherent risks associated with transmitting data over the internet and accept that we cannot guarantee absolute security. You are responsible for implementing appropriate security measures on your own devices and accounts.</p>
+        </div>
+        <div class="tos-clause">
+          <h3><span class="tos-clause-num">8</span> Intellectual Property</h3>
+          <p>All content provided by TMTCo — including but not limited to software, graphics, logos, and design — is the property of TMTCo or is used under licence. You may not reproduce, distribute, or use any TMTCo content without explicit written permission.</p>
+        </div>
+        <div class="tos-clause">
+          <h3><span class="tos-clause-num">9</span> Changes to These Terms</h3>
+          <p>These Terms may be updated periodically. Changes take effect immediately upon being posted to this page. We encourage you to review these Terms regularly. Continued use of our services after any changes constitutes your acceptance of the revised Terms.</p>
+        </div>
+        <div class="tos-clause">
+          <h3><span class="tos-clause-num">10</span> Contact</h3>
+          <p>If you have any questions, concerns, or feedback regarding these Terms, please get in touch:</p>
+          <div class="tos-note">📧 <a href="mailto:admin@themrtechguy.com">admin@themrtechguy.com</a> &nbsp;·&nbsp; 📞 02 7229 1918</div>
+        </div>
+      </div>
+      <div class="back-row"><a onclick="showView('home')" class="btn btn-ghost">← Back to Home</a></div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       VIEW: CONTACT
+       🔧 Edit phone, email, and details here
+       ============================================================ -->
+  <div id="view-contact" class="view">
+    <div class="page-section top">
+      <div class="section-header">
+        <div class="section-label">Get in touch</div>
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-sub">Reach out any time — we're happy to help with any questions or tech needs.</p>
+      </div>
+      <div class="contact-cards">
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div>
+            <span>Phone</span>
+            <!-- 🔧 Update phone number -->
+            <strong>02 7229 1918</strong>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <div>
+            <span>Email</span>
+            <strong><a href="mailto:admin@themrtechguy.com" style="color:var(--text)">admin@themrtechguy.com</a></strong>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🌐</div>
+          <div>
+            <span>Website</span>
+            <strong>themrtechguy.com</strong>
+          </div>
+        </div>
+        <!-- 🔧 Add more contact items here -->
+      </div>
+      <div class="back-row"><a onclick="showView('home')" class="btn btn-ghost">← Back to Home</a></div>
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <hr class="divider">
+  <footer>
+    <p>© 2025 TMTCo — All rights reserved.</p>
+    <div class="footer-links">
+      <a onclick="showView('tos')">Terms of Service</a>
+      <a onclick="showView('contact')">Contact</a>
+      <a onclick="showView('idcallback')">ID Callback</a>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       MSAL — loads after page, only used for password reset gate
+       ============================================================ -->
+  <script>
+    // ── Entra ID App Registration ──
+    var TENANT_ID = 'f1011f75-0d96-4d08-b8d4-6c79c851f9ba';
+    var CLIENT_ID = 'db8b6556-cec8-4b83-94b1-364cefd24203';
+
+    var msalInstance = null;
+    var loginRequest = { scopes: ['openid', 'profile', 'User.Read'] };
+
+    function initMsal() {
+      if (typeof msal === 'undefined') {
+        console.warn('MSAL not loaded — auth unavailable');
+        return;
+      }
+      var config = {
+        auth: {
+          clientId:    CLIENT_ID,
+          authority:   'https://login.microsoftonline.com/' + TENANT_ID,
+          redirectUri: window.location.origin + window.location.pathname,
+        },
+        cache: {
+          cacheLocation: 'sessionStorage',
+          storeAuthStateInCookie: false,
+        }
+      };
+      msalInstance = new msal.PublicClientApplication(config);
+
+      // Handle the redirect back from Microsoft after login
+      msalInstance.handleRedirectPromise().then(function(response) {
+        if (response) {
+          onLoginSuccess(response.account);
+        }
+      }).catch(function(err) {
+        console.error('MSAL redirect error:', err);
+        showLoginError();
+      });
+    }
+
+    function msalLogin() {
+      if (!msalInstance) {
+        showLoginError('Auth library not loaded. Please try again.');
+        return;
+      }
+      // Disable button, show loading
+      var btn = document.getElementById('ms-login-btn');
+      var loading = document.getElementById('login-loading');
+      if (btn) btn.disabled = true;
+      if (loading) loading.classList.add('visible');
+      document.getElementById('login-error').classList.remove('visible');
+
+      msalInstance.loginRedirect(loginRequest);
+    }
+
+    function msalLogout() {
+      if (!msalInstance) return;
+      msalInstance.logoutRedirect({ postLogoutRedirectUri: window.location.origin });
+    }
+
+    function onLoginSuccess(account) {
+      // Close the gate
+      document.getElementById('passreset-gate').classList.remove('active');
+      // Populate user bar
+      var nameEl  = document.getElementById('user-display-name');
+      var emailEl = document.getElementById('user-email');
+      if (nameEl)  nameEl.textContent = account.name  || account.username;
+      if (emailEl) emailEl.textContent = account.username;
+      // Show the portal
+      _activateView('passreset');
+    }
+
+    function showLoginError(msg) {
+      var errEl = document.getElementById('login-error');
+      var loading = document.getElementById('login-loading');
+      var btn = document.getElementById('ms-login-btn');
+      if (errEl) { errEl.textContent = msg || 'Sign-in failed or access denied. Contact admin@themrtechguy.com for help.'; errEl.classList.add('visible'); }
+      if (loading) loading.classList.remove('visible');
+      if (btn) btn.disabled = false;
+    }
+
+    // Load MSAL dynamically so a CDN failure can never break navigation
+    (function() {
+      var s = document.createElement('script');
+      s.src = 'https://alcdn.msauth.net/browser/2.38.3/js/msal-browser.min.js';
+      s.onload  = function() { initMsal(); };
+      s.onerror = function() { console.warn('Failed to load MSAL from CDN'); };
+      document.head.appendChild(s);
+    })();
+  </script>
+
+</body>
+</html>
