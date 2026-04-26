@@ -1,0 +1,21 @@
+{
+  "name": "tmtco-main-site",
+  "main": "src/index.js",
+  "compatibility_date": "2024-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // KV namespace for sessions (create in Cloudflare dashboard)
+  "kv_namespaces": [
+    {
+      "binding": "SESSIONS",
+      "id": "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+    }
+  ]
+
+  // Environment variables are set in Cloudflare Dashboard → Worker → Settings → Variables
+  // Do NOT put secrets here. Required vars:
+  //   TENANT_ID        - your Entra Directory (tenant) ID
+  //   CLIENT_ID        - your Entra Application (client) ID
+  //   CLIENT_SECRET    - set as a Secret (encrypted), not a plain var
+  //   BASE_URL         - e.g. https://themrtechguy.com
+}
