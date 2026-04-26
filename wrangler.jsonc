@@ -17,5 +17,5 @@
   //   TENANT_ID        - your Entra Directory (tenant) ID
   //   CLIENT_ID        - your Entra Application (client) ID
   //   CLIENT_SECRET    - set as a Secret (encrypted), not a plain var
-  //   BASE_URL         - e.g. https://themrtechguy.com
+  //   BASE_URL         - e.g. https://www.themrtechguy.com
 }
