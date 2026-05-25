@@ -197,7 +197,7 @@ function shell(title, body, activePage = '') {
   const navItem = (href, label, page) =>
     `<li><a href="${href}"${activePage === page ? ' class="active"' : ''}>${label}</a></li>`;
 
-  return `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -244,6 +244,15 @@ ${body}
 
 </body>
 </html>`;
+
+  return new Response(html, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/html; charset=UTF-8',
+      'X-Content-Type-Options': 'nosniff',
+      'Cache-Control': 'no-transform',
+    },
+  });
 }
 
 // Microsoft logo SVG for login button
@@ -365,7 +374,7 @@ app.get('/', (c) => {
   </div>
 </div>`;
 
-  return c.html(shell('TheMrTechGuy.com', body, 'home'));
+  return shell('TheMrTechGuy.com', body, 'home');
 });
 
 // ============================================================
@@ -395,7 +404,7 @@ app.get('/tech', (c) => {
   <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
 
-  return c.html(shell('Tech Things', body, 'tech'));
+  return shell('Tech Things', body, 'tech');
 });
 
 // ============================================================
@@ -438,7 +447,7 @@ app.get('/passreset', async (c) => {
       <div class="card-icon">&#x1F6E1;&#xFE0F;</div>
       <h3>Contact IT Admin</h3>
       <p>If self-service isn't working, reach out to the TMTCo admin directly for a manual reset.</p>
-      <a href="mailto:admin@themrtechguy.com">Email admin &rarr;</a>
+      <a href="mailto:logan.admin@directory.themrtechguy.com">Email admin &rarr;</a>
     </div>
 
     <!-- Add more password reset tools here -->
@@ -447,7 +456,7 @@ app.get('/passreset', async (c) => {
   <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
 
-    return c.html(shell('Cloud Password Reset', body, 'passreset'));
+    return shell('Cloud Password Reset', body, 'passreset');
   }
 
   // Not authenticated - show login wall
@@ -462,12 +471,12 @@ app.get('/passreset', async (c) => {
       ${MS_LOGO}
       Sign in with Microsoft
     </a>
-    ${error ? `<div class="error-box">Sign-in failed or access denied. Contact admin@themrtechguy.com for help.</div>` : ''}
+    ${error ? `<div class="error-box">Sign-in failed or access denied. Contact logan.admin@directory.themrtechguy.com for help.</div>` : ''}
     <p class="login-note">&#x1F512; Secured via Microsoft Entra ID &middot; TMTCo internal use only</p>
   </div>
 </div>`;
 
-  return c.html(shell('Sign In', body, 'passreset'));
+  return shell('Sign In', body, 'passreset');
 });
 
 // ============================================================
@@ -572,12 +581,12 @@ app.get('/idcallback', (c) => {
   <div class="placeholder-box">
     <div class="big-icon">&#x1F194;</div>
     <h3>Coming Soon</h3>
-    <p>This page is being set up. In the meantime reach out to <a href="mailto:admin@themrtechguy.com">admin@themrtechguy.com</a> for identity callback assistance.</p>
+    <p>This page is being set up. In the meantime reach out to <a href="mailto:logan.admin@directory.themrtechguy.com">logan.admin@directory.themrtechguy.com</a> for identity callback assistance.</p>
   </div>
   <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
 
-  return c.html(shell('ID Callback', body, 'idcallback'));
+  return shell('ID Callback', body, 'idcallback');
 });
 
 // ============================================================
@@ -639,14 +648,14 @@ app.get('/tos', (c) => {
     <div class="tos-clause">
       <h3><span class="tos-clause-num">10</span> Contact</h3>
       <p>If you have any questions or feedback regarding these Terms, please get in touch:</p>
-      <div class="tos-note">&#x1F4E7; <a href="mailto:admin@themrtechguy.com">admin@themrtechguy.com</a> &nbsp;&middot;&nbsp; &#x1F4DE; 02 7229 1918</div>
+      <div class="tos-note">&#x1F4E7; <a href="mailto:logan.admin@directory.themrtechguy.com">logan.admin@directory.themrtechguy.com</a> &nbsp;&middot;&nbsp; &#x1F4DE; +61 0493 715 746</div>
     </div>
 
   </div>
   <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
 
-  return c.html(shell('Terms of Service', body, 'tos'));
+  return shell('Terms of Service', body, 'tos');
 });
 
 // ============================================================
@@ -668,7 +677,7 @@ app.get('/contact', (c) => {
       <div>
         <span>Phone</span>
         <!-- Update phone number -->
-        <strong>02 7229 1918</strong>
+        <strong>+61 0493 715 746</strong>
       </div>
     </div>
 
@@ -676,7 +685,7 @@ app.get('/contact', (c) => {
       <div class="contact-item-icon">&#x2709;&#xFE0F;</div>
       <div>
         <span>Email</span>
-        <strong><a href="mailto:admin@themrtechguy.com" style="color:var(--text)">admin@themrtechguy.com</a></strong>
+        <strong><a href="mailto:logan.admin@directory.themrtechguy.com" style="color:var(--text)">logan.admin@directory.themrtechguy.com</a></strong>
       </div>
     </div>
 
@@ -694,7 +703,7 @@ app.get('/contact', (c) => {
   <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
 
-  return c.html(shell('Contact', body, 'contact'));
+  return shell('Contact', body, 'contact');
 });
 
 export default app;
