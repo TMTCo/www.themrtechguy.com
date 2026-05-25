@@ -191,7 +191,7 @@ const CSS = `
 `;
 
 // ============================================================
-// HTML SHELL â wraps every page
+// HTML SHELL -- wraps every page
 // ============================================================
 function shell(title, body, activePage = '') {
   const navItem = (href, label, page) =>
@@ -202,7 +202,7 @@ function shell(title, body, activePage = '') {
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>${title} â TMTCo</title>
+  <title>${title} - TMTCo</title>
   <style>${CSS}</style>
 </head>
 <body>
@@ -216,7 +216,7 @@ function shell(title, body, activePage = '') {
     ${navItem('/tos', 'Terms of Service', 'tos')}
     ${navItem('/contact', 'Contact', 'contact')}
   </ul>
-  <button class="hamburger" onclick="this.nextElementSibling;document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -225,7 +225,7 @@ ${body}
 
 <hr class="divider">
 <footer>
-  <p>Â© 2025 TMTCo â All rights reserved.</p>
+  <p>&copy; 2025 TMTCo &mdash; All rights reserved.</p>
   <div class="footer-links">
     <a href="/tos">Terms of Service</a>
     <a href="/contact">Contact</a>
@@ -233,7 +233,7 @@ ${body}
   </div>
 </footer>
 
-<!-- Microsoft Teams Chat Bot â appears on every page -->
+<!-- Microsoft Teams Chat Bot - appears on every page -->
 <script
   type="text/javascript"
   src="https://res.public.onecdn.static.microsoft/customerconnect/v1/7dttl/init.js"
@@ -294,14 +294,14 @@ async function destroySession(c) {
 }
 
 // ============================================================
-// ROUTES â HOME
+// ROUTES - HOME
 // ============================================================
 app.get('/', (c) => {
   const body = `
 <div class="hero">
-  <div class="hero-badge">â¡ Tech Solutions &amp; IT Support</div>
+  <div class="hero-badge">&#x26A1; Tech Solutions &amp; IT Support</div>
   <h1>Welcome to<br><span>TheMrTechGuy.com</span></h1>
-  <p>Your go-to hub for IT services, tech resources, and all things technology â backed by TMTCo.</p>
+  <p>Your go-to hub for IT services, tech resources, and all things technology &mdash; backed by TMTCo.</p>
   <div class="hero-ctas">
     <a href="/tech" class="btn btn-primary">Explore Services</a>
     <a href="/contact" class="btn btn-ghost">Get in Touch</a>
@@ -317,27 +317,27 @@ app.get('/', (c) => {
   <div class="cards">
 
     <div class="card">
-      <div class="card-icon">ð»</div>
+      <div class="card-icon">&#x1F4BB;</div>
       <h3>Tech Things</h3>
-      <p>Resources and downloads curated for tech enthusiasts â including tools like Tiny11 and more.</p>
-      <a href="/tech">Explore â</a>
+      <p>Resources and downloads curated for tech enthusiasts &mdash; including tools like Tiny11 and more.</p>
+      <a href="/tech">Explore &rarr;</a>
     </div>
 
     <div class="card">
-      <div class="card-icon">ð</div>
+      <div class="card-icon">&#x1F194;</div>
       <h3>ID Callback</h3>
       <p>Quick access to identity callback tools and services provided by TMTCo.</p>
-      <a href="/idcallback">Access â</a>
+      <a href="/idcallback">Access &rarr;</a>
     </div>
 
     <div class="card">
-      <div class="card-icon">âï¸</div>
+      <div class="card-icon">&#x2601;&#xFE0F;</div>
       <h3>Cloud Account Password Reset</h3>
       <p>Locked out? Use our cloud account password recovery portal to regain access. Authorised users only.</p>
-      <a href="/passreset">Go to portal â</a>
+      <a href="/passreset">Go to portal &rarr;</a>
     </div>
 
-    <!-- ð§ Add more service cards here -->
+    <!-- Add more service cards here -->
 
   </div>
 </div>
@@ -353,15 +353,15 @@ app.get('/', (c) => {
       <p>If you're a hiring manager or recruiter, you can grab a copy of my resume below.</p>
       <div class="resume-box">
         <div>
-          <strong>Logan Yeomans â Resume</strong>
-          <!-- ð§ Update date when you upload a new resume -->
-          <p>PDF download Â· Last updated 2025</p>
+          <strong>Logan Yeomans &mdash; Resume</strong>
+          <!-- Update date when you upload a new resume -->
+          <p>PDF download &middot; Last updated 2025</p>
         </div>
-        <!-- ð§ Update resume URL if it changes -->
-        <a class="btn btn-primary" href="https://www.themrtechguy.com/Logan%20Yeomans%20Resume.pdf" target="_blank">â¬ Download PDF</a>
+        <!-- Update resume URL if it changes -->
+        <a class="btn btn-primary" href="https://www.themrtechguy.com/Logan%20Yeomans%20Resume.pdf" target="_blank">&#x2B07; Download PDF</a>
       </div>
     </div>
-    <div class="about-placeholder">ð¨âð»</div>
+    <div class="about-placeholder">&#x1F468;&#x200D;&#x1F4BB;</div>
   </div>
 </div>`;
 
@@ -369,8 +369,8 @@ app.get('/', (c) => {
 });
 
 // ============================================================
-// ROUTES â TECH THINGS
-// ð§ Add more cards in the .cards grid below
+// ROUTES - TECH THINGS
+// Add more cards in the .cards grid below
 // ============================================================
 app.get('/tech', (c) => {
   const body = `
@@ -383,36 +383,35 @@ app.get('/tech', (c) => {
   <div class="cards">
 
     <div class="card">
-      <div class="card-icon">ðª</div>
+      <div class="card-icon">&#x1FA9F;</div>
       <h3>Tiny11</h3>
       <p>A lightweight build of Windows 11 that runs smoothly on older or lower-spec hardware. Stripped of bloat, designed to just work.</p>
-      <a href="https://archive.org/details/tiny-11-NTDEV/Screenshot_20230203-100010_YouTube.jpg" target="_blank">Download from Archive.org â</a>
+      <a href="https://archive.org/details/tiny-11-NTDEV/Screenshot_20230203-100010_YouTube.jpg" target="_blank">Download from Archive.org &rarr;</a>
     </div>
 
-    <!-- ð§ Add more tech resource cards here -->
+    <!-- Add more tech resource cards here -->
 
   </div>
-  <div class="back-row"><a href="/" class="btn btn-ghost">â Back to Home</a></div>
+  <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
 
   return c.html(shell('Tech Things', body, 'tech'));
 });
 
 // ============================================================
-// ROUTES â CLOUD PASSWORD RESET (auth protected)
+// ROUTES - CLOUD PASSWORD RESET (auth protected)
 // ============================================================
 
-// Show login page
 app.get('/passreset', async (c) => {
   const session = await getSession(c);
 
-  // Already authenticated â show portal
+  // Already authenticated - show portal
   if (session) {
     const body = `
 <div class="page-section top">
   <div class="user-bar">
     <div class="user-bar-info">
-      <div class="user-avatar">ð¤</div>
+      <div class="user-avatar">&#x1F464;</div>
       <div>
         <div class="user-name">${session.name || session.email}</div>
         <div class="user-email">${session.email}</div>
@@ -429,34 +428,34 @@ app.get('/passreset', async (c) => {
   <div class="cards">
 
     <div class="card">
-      <div class="card-icon">ð</div>
+      <div class="card-icon">&#x1F511;</div>
       <h3>Self-Service Password Reset</h3>
       <p>Reset your Microsoft 365 / Entra ID account password via the Microsoft SSPR portal.</p>
-      <a href="https://aka.ms/sspr" target="_blank">Open Microsoft SSPR â</a>
+      <a href="https://aka.ms/sspr" target="_blank">Open Microsoft SSPR &rarr;</a>
     </div>
 
     <div class="card">
-      <div class="card-icon">ð¡ï¸</div>
+      <div class="card-icon">&#x1F6E1;&#xFE0F;</div>
       <h3>Contact IT Admin</h3>
       <p>If self-service isn't working, reach out to the TMTCo admin directly for a manual reset.</p>
-      <a href="mailto:admin@themrtechguy.com">Email admin â</a>
+      <a href="mailto:admin@themrtechguy.com">Email admin &rarr;</a>
     </div>
 
-    <!-- ð§ Add more password reset tools here -->
+    <!-- Add more password reset tools here -->
 
   </div>
-  <div class="back-row"><a href="/" class="btn btn-ghost">â Back to Home</a></div>
+  <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
 
     return c.html(shell('Cloud Password Reset', body, 'passreset'));
   }
 
-  // Not authenticated â show login wall
+  // Not authenticated - show login wall
   const error = c.req.query('error');
   const body = `
 <div class="login-page">
   <div class="login-box">
-    <div class="lock-icon">ð</div>
+    <div class="lock-icon">&#x1F510;</div>
     <h2>Authorised Access Only</h2>
     <p>This portal is restricted to TMTCo staff and authorised users.<br>Sign in with your organisational account to continue.</p>
     <a href="/auth/login" class="ms-login-btn">
@@ -464,7 +463,7 @@ app.get('/passreset', async (c) => {
       Sign in with Microsoft
     </a>
     ${error ? `<div class="error-box">Sign-in failed or access denied. Contact admin@themrtechguy.com for help.</div>` : ''}
-    <p class="login-note">ð Secured via Microsoft Entra ID Â· TMTCo internal use only</p>
+    <p class="login-note">&#x1F512; Secured via Microsoft Entra ID &middot; TMTCo internal use only</p>
   </div>
 </div>`;
 
@@ -472,7 +471,7 @@ app.get('/passreset', async (c) => {
 });
 
 // ============================================================
-// ROUTES â AUTH (OAuth2 server-side flow)
+// ROUTES - AUTH (OAuth2 server-side flow)
 // ============================================================
 
 // Step 1: redirect to Microsoft
@@ -490,7 +489,6 @@ app.get('/auth/login', (c) => {
     state,
   });
 
-  // Store state in a short-lived cookie to validate on callback
   setCookie(c, 'oauth_state', state, {
     httpOnly: true, secure: true, sameSite: 'Lax', path: '/', maxAge: 300,
   });
@@ -505,7 +503,6 @@ app.get('/auth/callback', async (c) => {
   const { TENANT_ID, CLIENT_ID, CLIENT_SECRET, BASE_URL } = c.env;
   const { code, state, error } = c.req.query();
 
-  // Validate state
   const savedState = getCookie(c, 'oauth_state');
   deleteCookie(c, 'oauth_state', { path: '/' });
 
@@ -514,7 +511,6 @@ app.get('/auth/callback', async (c) => {
   }
 
   try {
-    // Exchange code for tokens
     const tokenRes = await fetch(
       `https://login.microsoftonline.com/${TENANT_ID}/oauth2/v2.0/token`,
       {
@@ -533,7 +529,6 @@ app.get('/auth/callback', async (c) => {
     if (!tokenRes.ok) return c.redirect('/passreset?error=1');
     const tokens = await tokenRes.json();
 
-    // Get user profile from Graph
     const graphRes = await fetch('https://graph.microsoft.com/v1.0/me', {
       headers: { Authorization: `Bearer ${tokens.access_token}` },
     });
@@ -541,7 +536,6 @@ app.get('/auth/callback', async (c) => {
     if (!graphRes.ok) return c.redirect('/passreset?error=1');
     const user = await graphRes.json();
 
-    // Create session
     await createSession(c, {
       name:  user.displayName || user.givenName || '',
       email: user.mail || user.userPrincipalName || '',
@@ -564,8 +558,8 @@ app.get('/auth/logout', async (c) => {
 });
 
 // ============================================================
-// ROUTES â ID CALLBACK
-// ð§ Replace the placeholder content below with your actual tools
+// ROUTES - ID CALLBACK
+// Replace the placeholder content below with your actual tools
 // ============================================================
 app.get('/idcallback', (c) => {
   const body = `
@@ -576,19 +570,19 @@ app.get('/idcallback', (c) => {
     <p class="section-sub">TMTCo identity callback services. Contact admin if you need access or assistance.</p>
   </div>
   <div class="placeholder-box">
-    <div class="big-icon">ð</div>
+    <div class="big-icon">&#x1F194;</div>
     <h3>Coming Soon</h3>
     <p>This page is being set up. In the meantime reach out to <a href="mailto:admin@themrtechguy.com">admin@themrtechguy.com</a> for identity callback assistance.</p>
   </div>
-  <div class="back-row"><a href="/" class="btn btn-ghost">â Back to Home</a></div>
+  <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
 
   return c.html(shell('ID Callback', body, 'idcallback'));
 });
 
 // ============================================================
-// ROUTES â TERMS OF SERVICE
-// ð§ Edit clauses below â update the date when you revise
+// ROUTES - TERMS OF SERVICE
+// Edit clauses below - update the date when you revise
 // ============================================================
 app.get('/tos', (c) => {
   const body = `
@@ -600,8 +594,8 @@ app.get('/tos', (c) => {
   </div>
   <div class="tos-body">
 
-    <!-- ð§ Update this date whenever you revise the TOS -->
-    <div class="tos-updated">ð Last reviewed: 2025</div>
+    <!-- Update this date whenever you revise the TOS -->
+    <div class="tos-updated">&#x1F4C5; Last reviewed: 2025</div>
 
     <p class="tos-intro">Welcome to themrtechguy.com. These Terms of Service govern your use of all services provided through this website and associated platforms operated by TMTCo. By accessing or using our services, you agree to be bound by these terms. If you do not agree, please discontinue use of our services immediately.</p>
 
@@ -612,7 +606,7 @@ app.get('/tos', (c) => {
     <div class="tos-clause">
       <h3><span class="tos-clause-num">2</span> User Accounts and Data</h3>
       <p>Certain services may require you to create an account or have data associated with you. You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account. You agree to provide accurate and complete information at all times.</p>
-      <div class="tos-note">â ï¸ This clause applies only to services that require a user account or store your data â it does not apply to this website itself.</div>
+      <div class="tos-note">&#x26A0;&#xFE0F; This clause applies only to services that require a user account or store your data &mdash; it does not apply to this website itself.</div>
     </div>
     <div class="tos-clause">
       <h3><span class="tos-clause-num">3</span> Data Ownership and Responsibility</h3>
@@ -636,7 +630,7 @@ app.get('/tos', (c) => {
     </div>
     <div class="tos-clause">
       <h3><span class="tos-clause-num">8</span> Intellectual Property</h3>
-      <p>All content provided by TMTCo â including but not limited to software, graphics, logos, and design â is the property of TMTCo or is used under licence. You may not reproduce, distribute, or use any TMTCo content without explicit written permission.</p>
+      <p>All content provided by TMTCo &mdash; including but not limited to software, graphics, logos, and design &mdash; is the property of TMTCo or is used under licence. You may not reproduce, distribute, or use any TMTCo content without explicit written permission.</p>
     </div>
     <div class="tos-clause">
       <h3><span class="tos-clause-num">9</span> Changes to These Terms</h3>
@@ -645,19 +639,19 @@ app.get('/tos', (c) => {
     <div class="tos-clause">
       <h3><span class="tos-clause-num">10</span> Contact</h3>
       <p>If you have any questions or feedback regarding these Terms, please get in touch:</p>
-      <div class="tos-note">ð§ <a href="mailto:admin@themrtechguy.com">admin@themrtechguy.com</a> &nbsp;Â·&nbsp; ð 02 7229 1918</div>
+      <div class="tos-note">&#x1F4E7; <a href="mailto:admin@themrtechguy.com">admin@themrtechguy.com</a> &nbsp;&middot;&nbsp; &#x1F4DE; 02 7229 1918</div>
     </div>
 
   </div>
-  <div class="back-row"><a href="/" class="btn btn-ghost">â Back to Home</a></div>
+  <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
 
   return c.html(shell('Terms of Service', body, 'tos'));
 });
 
 // ============================================================
-// ROUTES â CONTACT
-// ð§ Edit phone, email and details here
+// ROUTES - CONTACT
+// Edit phone, email and details here
 // ============================================================
 app.get('/contact', (c) => {
   const body = `
@@ -665,21 +659,21 @@ app.get('/contact', (c) => {
   <div class="section-header">
     <div class="section-label">Get in touch</div>
     <h2 class="section-title">Contact Us</h2>
-    <p class="section-sub">Reach out any time â we're happy to help with any questions or tech needs.</p>
+    <p class="section-sub">Reach out any time &mdash; we're happy to help with any questions or tech needs.</p>
   </div>
   <div class="contact-cards">
 
     <div class="contact-item">
-      <div class="contact-item-icon">ð</div>
+      <div class="contact-item-icon">&#x1F4DE;</div>
       <div>
         <span>Phone</span>
-        <!-- ð§ Update phone number -->
+        <!-- Update phone number -->
         <strong>02 7229 1918</strong>
       </div>
     </div>
 
     <div class="contact-item">
-      <div class="contact-item-icon">âï¸</div>
+      <div class="contact-item-icon">&#x2709;&#xFE0F;</div>
       <div>
         <span>Email</span>
         <strong><a href="mailto:admin@themrtechguy.com" style="color:var(--text)">admin@themrtechguy.com</a></strong>
@@ -687,17 +681,17 @@ app.get('/contact', (c) => {
     </div>
 
     <div class="contact-item">
-      <div class="contact-item-icon">ð</div>
+      <div class="contact-item-icon">&#x1F310;</div>
       <div>
         <span>Website</span>
         <strong>themrtechguy.com</strong>
       </div>
     </div>
 
-    <!-- ð§ Add more contact items here -->
+    <!-- Add more contact items here -->
 
   </div>
-  <div class="back-row"><a href="/" class="btn btn-ghost">â Back to Home</a></div>
+  <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
 
   return c.html(shell('Contact', body, 'contact'));
