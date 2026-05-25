@@ -1,5 +1,5 @@
 {
-  "name": "tmtco-main-site",
+  "name": "tmtcosite",
   "main": "src/index.js",
   "compatibility_date": "2024-11-01",
   "compatibility_flags": ["nodejs_compat"],
@@ -7,7 +7,7 @@
   "kv_namespaces": [
     {
       "binding": "SESSIONS",
-      "id": "252a6494ae754649a12ba38d642cec25"
+      "id": "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
     }
   ],
 
