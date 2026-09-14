@@ -190,6 +190,10 @@ const CSS = `
   }
 `;
 
+// ${navItem('/idcallback', 'ID Callback', 'idcallback')}
+// above code once needed again goes back with each other simular on line 217
+//<a href="/idcallback">ID Callback</a>
+//this above goes on line 236
 // ============================================================
 // HTML SHELL -- wraps every page
 // ============================================================
@@ -212,7 +216,7 @@ function shell(title, body, activePage = '') {
     ${navItem('/', 'Home', 'home')}
     ${navItem('/tech', 'Tech Things', 'tech')}
     ${navItem('/passreset', 'Cloud Password Reset', 'passreset')}
-    ${navItem('/idcallback', 'ID Callback', 'idcallback')}
+     
     ${navItem('/tos', 'Terms of Service', 'tos')}
     ${navItem('/contact', 'Contact', 'contact')}
   </ul>
@@ -220,6 +224,8 @@ function shell(title, body, activePage = '') {
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+
 
 ${body}
 
@@ -229,7 +235,7 @@ ${body}
   <div class="footer-links">
     <a href="/tos">Terms of Service</a>
     <a href="/contact">Contact</a>
-    <a href="/idcallback">ID Callback</a>
+    
   </div>
 </footer>
 
@@ -309,7 +315,8 @@ app.get('/', (c) => {
   const body = `
 <div class="hero">
   <div class="hero-badge">&#x26A1; Tech Solutions &amp; IT Support</div>
-  <h1>Welcome to<br><span>TheMrTechGuy.com</span></h1>
+  <h1>Welcome to<br><span>Themrtechguy.com</span></h1>
+  <h1>and<br>tmtcoau.com<span></span></h1>
   <p>Your go-to hub for IT services, tech resources, and all things technology &mdash; backed by TMTCo.</p>
   <div class="hero-ctas">
     <a href="/tech" class="btn btn-primary">Explore Services</a>
@@ -346,7 +353,11 @@ app.get('/', (c) => {
       <a href="/passreset">Go to portal &rarr;</a>
     </div>
 
-    <!-- Add more service cards here -->
+    <div class="card>
+      <div class-card-icon">&#x2601;&#xFE0F;</div>
+      <h3>Privacy Statement</h3>
+      <p>Access TMTCo Privacy Statement</p>
+    </div>
 
   </div>
 </div>
