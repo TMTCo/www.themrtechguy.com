@@ -238,7 +238,7 @@ function shell(title, body, activePage = '') {
      
     ${navItem('/tos', 'Terms of Service', 'tos')}
     ${navItem('/contact', 'Contact', 'contact')}
-    ${navItem('/privacy', 'Privacy Statement', 'privacy)}
+    ${navItem('/privacy', 'Privacy', 'privacy')}
   </ul>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
