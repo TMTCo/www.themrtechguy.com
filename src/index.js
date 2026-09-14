@@ -134,6 +134,25 @@ const CSS = `
     border:1px solid var(--border);border-radius:8px;padding:.5rem 1rem;
     font-size:.8rem;color:var(--muted);margin-bottom:2rem}
 
+  /* PRIVACY STATEMENT */
+  .tos-body{max-width:760px}
+  .tos-intro{color:var(--muted);font-size:.97rem;margin-bottom:2.5rem;padding-bottom:2rem;
+    border-bottom:1px solid var(--border)}
+  .tos-clause{margin-bottom:2rem}
+  .tos-clause h3{font-family:var(--heading);font-size:1rem;font-weight:700;color:#fff;
+    margin-bottom:.6rem;display:flex;align-items:center;gap:.75rem}
+  .tos-clause-num{display:inline-flex;align-items:center;justify-content:center;
+    width:26px;height:26px;border-radius:6px;background:rgba(59,130,246,.12);
+    border:1px solid rgba(59,130,246,.2);font-size:.75rem;font-weight:700;
+    color:var(--accent2);flex-shrink:0}
+  .tos-clause p{color:var(--muted);font-size:.92rem;line-height:1.75}
+  .tos-note{margin-top:.5rem;padding:.6rem .9rem;background:rgba(59,130,246,.07);
+    border-left:2px solid var(--accent);border-radius:0 6px 6px 0;font-size:.85rem;color:var(--muted)}
+  .tos-updated{display:inline-flex;align-items:center;gap:.5rem;background:var(--surface2);
+    border:1px solid var(--border);border-radius:8px;padding:.5rem 1rem;
+    font-size:.8rem;color:var(--muted);margin-bottom:2rem}
+
+
   /* LOGIN GATE */
   .login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
   .login-box{background:var(--surface);border:1px solid var(--border);border-radius:20px;
@@ -219,6 +238,7 @@ function shell(title, body, activePage = '') {
      
     ${navItem('/tos', 'Terms of Service', 'tos')}
     ${navItem('/contact', 'Contact', 'contact')}
+    ${navItem('/privacy', 'Privacy Statement', 'privacy)}
   </ul>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -231,11 +251,11 @@ ${body}
 
 <hr class="divider">
 <footer>
-  <p>&copy; 2025 TMTCo &mdash; All rights reserved.</p>
+  <p>&copy; 2026 TMTCo &mdash; All rights reserved.</p>
   <div class="footer-links">
     <a href="/tos">Terms of Service</a>
     <a href="/contact">Contact</a>
-    
+    <a href="/privacy">Privacy</a>
   </div>
 </footer>
 
