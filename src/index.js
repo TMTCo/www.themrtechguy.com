@@ -690,6 +690,86 @@ app.get('/tos', (c) => {
 });
 
 // ============================================================
+// ROUTES - PRIVACY POLICY
+// Edit clauses below - update the date when you revise
+// ============================================================
+app.get('/privacy', (c) => {
+  const body = `
+<div class="page-section top">
+  <div class="section-header">
+    <div class="section-label">Legal</div>
+    <h2 class="section-title">Privacy Policy</h2>
+    <p class="section-sub">How we collect, use, and protect your information across all services hosted on themrtechguy.com and operated by TMTCo.</p>
+  </div>
+  <div class="tos-body">
+
+    <!-- Update this date whenever you revise the Privacy Policy -->
+    <div class="tos-updated">&#x1F4C5; Last reviewed: 2025</div>
+
+    <p class="tos-intro">This Privacy Policy explains how TMTCo collects, uses, discloses, and safeguards your information when you use themrtechguy.com or any associated service. By using our services, you consent to the practices described in this policy. If you do not agree with this policy, please discontinue use of our services immediately.</p>
+
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">1</span> Information We Collect</h3>
+      <p>We may collect information you provide directly, such as your name, email address, and any content or files you submit to a TMTCo service. We may also automatically collect technical information such as your IP address, browser type, device information, and usage data when you interact with our services.</p>
+      <div class="tos-note">&#x26A0;&#xFE0F; Account-related data collection applies only to services that require a user account &mdash; it does not apply to this website itself.</div>
+    </div>
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">2</span> How We Use Your Information</h3>
+      <p>We use collected information to operate, maintain, and improve our services, to respond to your inquiries, to monitor and prevent misuse, and to comply with legal obligations. We do not sell your personal information to third parties.</p>
+    </div>
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">3</span> Cookies and Tracking</h3>
+      <p>We may use cookies or similar technologies to support basic site functionality and to understand how our services are used. You can control or disable cookies through your browser settings, though some features may not function correctly without them.</p>
+    </div>
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">4</span> Data Sharing and Disclosure</h3>
+      <p>We do not share your personal information with third parties except: where necessary to provide a service you have requested, where required to comply with applicable law or legal process, to protect the rights, property, or safety of TMTCo or others, or with your explicit consent.</p>
+    </div>
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">5</span> Microsoft Entra ID and Company Accounts</h3>
+      <p>Some TMTCo services are accessed using Microsoft Entra ID (formerly Azure Active Directory) for identity and access management. Where this applies, we may process account information provided by Entra ID, such as your name, organisational email address, user ID, and assigned roles or group memberships, in order to authenticate you and control access to the relevant service.</p>
+      <p>This includes guest accounts provisioned through Entra ID B2B collaboration for external users invited to access TMTCo services on behalf of a partner organisation or client. Guest account information is used solely to manage access and is subject to the access policies of both TMTCo and the guest's home organisation.</p>
+      <p>We do not control, and are not responsible for, the identity or directory data managed within a third-party organisation's own Entra ID tenant. Access to TMTCo services via Entra ID can be revoked at any time by TMTCo or by the account's home organisation.</p>
+      <div class="tos-note">&#x26A0;&#xFE0F; This clause applies only to services that use Entra ID for sign-in &mdash; it does not apply to this website itself.</div>
+    </div>
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">6</span> Data Retention</h3>
+      <p>We retain your information only for as long as necessary to fulfil the purposes outlined in this policy, or as required by law. When information is no longer needed, we take reasonable steps to delete or anonymise it.</p>
+    </div>
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">7</span> Data Security</h3>
+      <p>We implement reasonable security measures to protect information handled by TMTCo services. However, no system is entirely immune to risk. You acknowledge the inherent risks associated with transmitting data over the internet and accept that we cannot guarantee absolute security.</p>
+    </div>
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">8</span> Your Rights and Choices</h3>
+      <p>Depending on your location, you may have rights to access, correct, or request deletion of your personal information, or to object to or restrict certain processing. To exercise any of these rights, please contact us using the details below.</p>
+    </div>
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">9</span> Third-Party Links and Services</h3>
+      <p>Our services may contain links to third-party websites or integrate with third-party services. We are not responsible for the privacy practices of those third parties, and we encourage you to review their respective privacy policies.</p>
+    </div>
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">10</span> Children's Privacy</h3>
+      <p>Our services are not directed to children, and we do not knowingly collect personal information from children. If you believe a child has provided us with personal information, please contact us so we can take appropriate action.</p>
+    </div>
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">11</span> Changes to This Policy</h3>
+      <p>This Privacy Policy may be updated periodically. Changes take effect immediately upon being posted to this page. Continued use of our services after any changes constitutes your acceptance of the revised policy.</p>
+    </div>
+    <div class="tos-clause">
+      <h3><span class="tos-clause-num">12</span> Contact</h3>
+      <p>If you have any questions or concerns regarding this Privacy Policy or your personal information, please get in touch:</p>
+      <div class="tos-note">&#x1F4E7; <a href="mailto:logan.admin@directory.themrtechguy.com">logan.admin@directory.themrtechguy.com</a> &nbsp;&middot;&nbsp; &#x1F4DE; +61 0493 715 746</div>
+    </div>
+
+  </div>
+  <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
+</div>`;
+
+  return shell('Privacy Policy', body, 'privacy');
+});
+
+// ============================================================
 // ROUTES - CONTACT
 // Edit phone, email and details here
 // ============================================================
