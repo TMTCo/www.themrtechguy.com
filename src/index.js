@@ -389,7 +389,7 @@ app.get('/', (c) => {
     <div class="about-text">
       <div class="section-label">About</div>
       <h2 class="section-title">For Hiring &amp; Interviewers</h2>
-      <p>I'm Logan Yeomans, the person behind TheMrTechGuy.com and TMTCo. I'm passionate about technology, IT infrastructure, and building practical solutions.</p>
+      <p>I'm Logan Yeomans, the person behind themrtechguy.com, tmtcoau.com and TMTCo. I'm passionate about technology, IT infrastructure, and building practical solutions.</p>
       <p>If you're a hiring manager or recruiter, you can grab a copy of my resume below.</p>
       <div class="resume-box">
         <div>
@@ -398,14 +398,14 @@ app.get('/', (c) => {
           <p>PDF download &middot; Last updated 2025</p>
         </div>
         <!-- Update resume URL if it changes -->
-        <a class="btn btn-primary" href="https://www.themrtechguy.com/Logan%20Yeomans%20Resume.pdf" target="_blank">&#x2B07; Download PDF</a>
+        <a class="btn btn-primary" href="https://git.github.themrtechguy.com/TMTCo-Main-Site-assets/Logan-Yeomans-Kelly-Resume.pdf" target="_blank">&#x2B07; Download PDF</a>
       </div>
     </div>
     <div class="about-placeholder">&#x1F468;&#x200D;&#x1F4BB;</div>
   </div>
 </div>`;
 
-  return shell('TheMrTechGuy.com', body, 'home');
+  return shell('TMTCo', body, 'home');
 });
 
 // ============================================================
