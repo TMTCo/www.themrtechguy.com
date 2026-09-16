@@ -227,12 +227,12 @@ function shell(title, body, activePage = '') {
 
 
 
-  <link rel="icon" type="image/png" href="/tmtco-assets/favicon/favicon-96x96.png?v=20260916" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/tmtco-assets/favicon/favicon.svg?v=20260916" />
-  <link rel="shortcut icon" href="/tmtco-assets/favicon/favicon.ico?v=20260916" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/tmtco-assets/favicon/apple-touch-icon.png?v=20260916" />
+  <link rel="icon" type="image/png" href="https://tmtcoau.com/favicon/favicon-96x96.png?v=20260916" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="https://tmtcoau.com/favicon/favicon.svg?v=20260916" />
+  <link rel="shortcut icon" href="https://tmtcoau.com/favicon/favicon.ico?v=20260916" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://tmtcoau.com/favicon/apple-touch-icon.png?v=20260916" />
   <meta name="apple-mobile-web-app-title" content="TMTCo" />
-  <link rel="manifest" href="/tmtco-assets/favicon/site.webmanifest?v=20260916" />
+  <link rel="manifest" href="https://tmtcoau.com/tmtco-assets/favicon/site.webmanifest?v=20260916" />
 </head>
 
 <body>
