@@ -398,7 +398,7 @@ app.get('/', (c) => {
           <p>PDF download &middot; Last updated 2025</p>
         </div>
         <!-- Update resume URL if it changes -->
-        <a class="btn btn-primary" href="https://git.github.themrtechguy.com/TMTCo-Main-Site-assets/Logan-Yeomans-Kelly-Resume.pdf" target="_blank">&#x2B07; Download PDF</a>
+        <a class="btn btn-primary" href="https://git.github.themrtechguy.com/TMTCo-Main-Site-assets/Logan%20Yeomans%20Resume.pdff" target="_blank">&#x2B07; Download PDF</a>
       </div>
     </div>
     <div class="about-placeholder">&#x1F468;&#x200D;&#x1F4BB;</div>
