@@ -361,9 +361,9 @@ app.get('/', (c) => {
 
     <div class="card">
       <div class="card-icon">&#x1F194;</div>
-      <h3>ID Callback</h3>
-      <p>Quick access to identity callback tools and services provided by TMTCo.</p>
-      <a href="/idcallback">Access &rarr;</a>
+      <h3>Privacy Statement</h3>
+      <p>Access the company privacy statement.</p>
+      <a href="/privacy">Access</a>
     </div>
 
     <div class="card">
@@ -373,11 +373,7 @@ app.get('/', (c) => {
       <a href="/passreset">Go to portal &rarr;</a>
     </div>
 
-    <div class="card>
-      <div class-card-icon">&#x2601;&#xFE0F;</div>
-      <h3>Privacy Statement</h3>
-      <p>Access TMTCo Privacy Statement</p>
-    </div>
+
 
   </div>
 </div>
