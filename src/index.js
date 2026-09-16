@@ -209,10 +209,7 @@ const CSS = `
   }
 `;
 
-// ${navItem('/idcallback', 'ID Callback', 'idcallback')}
-// above code once needed again goes back with each other simular on line 217
-//<a href="/idcallback">ID Callback</a>
-//this above goes on line 236
+
 // ============================================================
 // HTML SHELL -- wraps every page
 // ============================================================
@@ -234,11 +231,12 @@ function shell(title, body, activePage = '') {
   <ul class="nav-links" id="navLinks">
     ${navItem('/', 'Home', 'home')}
     ${navItem('/tech', 'Tech Things', 'tech')}
-    ${navItem('/passreset', 'Cloud Password Reset', 'passreset')}
-     
+    ${navItem('/passreset', 'Cloud Password Reset', 'passreset')}  
     ${navItem('/tos', 'Terms of Service', 'tos')}
     ${navItem('/contact', 'Contact', 'contact')}
     ${navItem('/privacy', 'Privacy', 'privacy')}
+    ${navItem('/services', 'Services', 'services')}
+    ${navItem('/dashboard', 'Dashboard', 'dashboard')}
   </ul>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -258,15 +256,6 @@ ${body}
     <a href="/privacy">Privacy</a>
   </div>
 </footer>
-
-<!-- Microsoft Teams Chat Bot - appears on every page -->
-<script
-  type="text/javascript"
-  src="https://res.public.onecdn.static.microsoft/customerconnect/v1/7dttl/init.js"
-  id="chatbot"
-  environmentId="297d0232-29c4-ec49-9042-fe149dab0bc9"
-  crossorigin="anonymous">
-</script>
 
 </body>
 </html>`;
