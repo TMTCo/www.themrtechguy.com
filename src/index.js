@@ -232,7 +232,7 @@ function shell(title, body, activePage = '') {
   <link rel="shortcut icon" href="https://tmtcoau.com/favicon/favicon.ico?v=20260916" />
   <link rel="apple-touch-icon" sizes="180x180" href="https://tmtcoau.com/favicon/apple-touch-icon.png?v=20260916" />
   <meta name="apple-mobile-web-app-title" content="TMTCo" />
-  <link rel="manifest" href="https://tmtcoau.com/tmtco-assets/favicon/site.webmanifest?v=20260916" />
+  <link rel="manifest" href="https://tmtcoau.com/favicon/site.webmanifest?v=20260916" />
 </head>
 
 <body>
