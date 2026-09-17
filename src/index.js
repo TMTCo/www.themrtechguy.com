@@ -202,7 +202,20 @@ border:1px solid rgba(59,130,246,.3);display:flex;align-items:center;justify-con
 .user-name{font-size:.85rem;color:var(--text);font-weight:500}
 .user-email{font-size:.78rem;color:var(--muted)}
 
-/* PLACEHOLDER BOX - used for ID Callback / Services / Dashboard stubs */
+/* ADMIN CENTRE SECTION (dashboard) */
+.admin-section{margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--border)}
+.admin-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
+.admin-icon{width:44px;height:44px;flex-shrink:0;border-radius:10px;background:rgba(239,68,68,.1);
+border:1px solid rgba(239,68,68,.25);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.admin-header h3{font-family:var(--heading);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.35rem}
+.admin-header p{color:var(--muted);font-size:.85rem;max-width:560px}
+.admin-links{display:flex;flex-wrap:wrap;gap:.6rem}
+.admin-link{display:inline-block;padding:.55rem 1rem;background:var(--surface);
+border:1px solid var(--border);border-radius:8px;font-size:.82rem;font-weight:500;
+color:var(--muted);transition:all var(--transition)}
+.admin-link:hover{border-color:rgba(59,130,246,.4);color:var(--accent2);transform:translateY(-2px)}
+
+/* ID CALLBACK / SERVICES PLACEHOLDER */
 .placeholder-box{background:var(--surface);border:1px solid var(--border);
 border-radius:var(--radius);padding:3rem 2rem;text-align:center;max-width:560px;margin:0 auto}
 .placeholder-box .big-icon{font-size:3rem;margin-bottom:1rem}
@@ -266,11 +279,11 @@ function shell(title, body, activePage = '') {
 ${navItem('/', 'Home', 'home')}
 ${navItem('/tech', 'Tech Things', 'tech')}
 ${navItem('/passreset', 'Cloud Password Reset', 'passreset')}
+${navItem('/dashboard', 'Dashboard', 'dashboard')}
 ${navItem('/tos', 'Terms of Service', 'tos')}
 ${navItem('/contact', 'Contact', 'contact')}
 ${navItem('/privacy', 'Privacy', 'privacy')}
 ${navItem('/services', 'Services', 'services')}
-${navItem('/dashboard', 'Dashboard', 'dashboard')}
 </ul>
 </aside>
 
@@ -388,11 +401,11 @@ async function destroySession(c) {
 
 // ============================================================
 // MULTI-DOMAIN HELPERS
-// Add any additional domains you want Microsoft login to work on.
-// Each domain listed here MUST also be added as a redirect URI in
-// your Entra ID App Registration, e.g.:
+// Both redirect URIs are registered in the Entra ID App Registration:
 //   https://www.themrtechguy.com/auth/callback
 //   https://www.tmtcoau.com/auth/callback
+// so the redirect_uri sent to Microsoft is derived from whichever domain
+// the user is actually on - no cross-domain bridging needed.
 // ============================================================
 const ALLOWED_HOSTS = [
   'www.themrtechguy.com',
@@ -408,6 +421,13 @@ function getBaseUrl(c) {
   }
   // Fallback for anything not in the allowlist (e.g. workers.dev preview URL)
   return c.env.BASE_URL;
+}
+
+// Pages the login flow is allowed to return to after auth.
+// Keeps /auth/login?next=... from being usable as an open redirect.
+const ALLOWED_NEXT_PATHS = ['/passreset', '/dashboard'];
+function sanitizeNext(path) {
+  return ALLOWED_NEXT_PATHS.includes(path) ? path : '/passreset';
 }
 
 // ============================================================
@@ -558,7 +578,7 @@ app.get('/passreset', async (c) => {
 <div class="lock-icon">&#x1F510;</div>
 <h2>Authorised Access Only</h2>
 <p>This portal is restricted to TMTCo staff and authorised users.<br>Sign in with your organisational account to continue.</p>
-<a href="/auth/login" class="ms-login-btn">
+<a href="/auth/login?next=/passreset" class="ms-login-btn">
 ${MS_LOGO}
 Sign in with Microsoft
 </a>
@@ -570,8 +590,137 @@ ${error ? `<div class="error-box">Sign-in failed or access denied. Contact logan
 });
 
 // ============================================================
+// ROUTES - DASHBOARD (auth protected - same login flow as /passreset)
+// Quick access to Microsoft 365 apps, plus an Admin Centre section at
+// the bottom linking to the Microsoft admin portals. Access to each
+// admin portal is still gated by the signed-in user's actual admin
+// role assignments in Entra ID - these are just direct links, not a
+// bypass of that role check.
+// ============================================================
+app.get('/dashboard', async (c) => {
+  const session = await getSession(c);
+
+  if (session) {
+    const body = `
+<div class="page-section top">
+<div class="user-bar">
+<div class="user-bar-info">
+<div class="user-avatar">&#x1F464;</div>
+<div>
+<div class="user-name">${session.name || session.email}</div>
+<div class="user-email">${session.email}</div>
+</div>
+</div>
+<a href="/auth/logout" class="btn btn-ghost" style="font-size:.85rem;padding:.5rem 1rem;">Sign out</a>
+</div>
+
+<div class="section-header">
+<div class="section-label">TMTCo</div>
+<h2 class="section-title">Dashboard</h2>
+<p class="section-sub">Quick access to your Microsoft 365 apps and files.</p>
+</div>
+<div class="cards">
+<a href="https://outlook.office.com/mail/" target="_blank" class="card">
+<div class="card-icon">&#x1F4E7;</div>
+<h3>Outlook</h3>
+<p>Check email, calendar, and contacts.</p>
+<span class="card-link">Open Outlook &rarr;</span>
+</a>
+<a href="https://tmtcoau-my.sharepoint.com" target="_blank" class="card">
+<div class="card-icon">&#x1F4C1;</div>
+<h3>OneDrive</h3>
+<p>Access your TMTCo OneDrive files and folders.</p>
+<span class="card-link">Open OneDrive &rarr;</span>
+</a>
+<a href="https://www.office.com/launch/word" target="_blank" class="card">
+<div class="card-icon">&#x1F4DD;</div>
+<h3>Word</h3>
+<p>Create and edit documents online.</p>
+<span class="card-link">Open Word &rarr;</span>
+</a>
+<a href="https://www.office.com/launch/excel" target="_blank" class="card">
+<div class="card-icon">&#x1F4CA;</div>
+<h3>Excel</h3>
+<p>Create and edit spreadsheets online.</p>
+<span class="card-link">Open Excel &rarr;</span>
+</a>
+<a href="https://www.office.com/launch/powerpoint" target="_blank" class="card">
+<div class="card-icon">&#x1F4FD;&#xFE0F;</div>
+<h3>PowerPoint</h3>
+<p>Create and edit presentations online.</p>
+<span class="card-link">Open PowerPoint &rarr;</span>
+</a>
+<a href="https://teams.microsoft.com" target="_blank" class="card">
+<div class="card-icon">&#x1F4AC;</div>
+<h3>Teams</h3>
+<p>Chat, meet, and collaborate with the team.</p>
+<span class="card-link">Open Teams &rarr;</span>
+</a>
+<a href="https://tmtcoau.sharepoint.com" target="_blank" class="card">
+<div class="card-icon">&#x1F5C2;&#xFE0F;</div>
+<h3>SharePoint</h3>
+<p>Browse TMTCo team sites and shared document libraries.</p>
+<span class="card-link">Open SharePoint &rarr;</span>
+</a>
+<a href="https://www.office.com" target="_blank" class="card">
+<div class="card-icon">&#x1F5C3;&#xFE0F;</div>
+<h3>All Apps</h3>
+<p>Browse the full Microsoft 365 app launcher.</p>
+<span class="card-link">Open Microsoft 365 &rarr;</span>
+</a>
+</div>
+
+<div class="admin-section">
+<div class="admin-header">
+<span class="admin-icon">&#x1F6E1;&#xFE0F;</span>
+<div>
+<h3>Admin Centre</h3>
+<p>Direct links to Microsoft's admin portals. Access to each one still depends on your account's assigned admin role in Entra ID.</p>
+</div>
+</div>
+<div class="admin-links">
+<a href="https://admin.microsoft.com" target="_blank" class="admin-link">Microsoft 365 admin center</a>
+<a href="https://entra.microsoft.com" target="_blank" class="admin-link">Entra admin center</a>
+<a href="https://admin.exchange.microsoft.com" target="_blank" class="admin-link">Exchange admin center</a>
+<a href="https://tmtcoau-admin.sharepoint.com" target="_blank" class="admin-link">SharePoint admin center</a>
+<a href="https://admin.teams.microsoft.com" target="_blank" class="admin-link">Teams admin center</a>
+<a href="https://security.microsoft.com" target="_blank" class="admin-link">Security admin center</a>
+<a href="https://compliance.microsoft.com" target="_blank" class="admin-link">Purview compliance portal</a>
+<a href="https://intune.microsoft.com" target="_blank" class="admin-link">Intune admin center</a>
+<a href="https://portal.azure.com" target="_blank" class="admin-link">Azure portal</a>
+<a href="https://admin.powerplatform.microsoft.com" target="_blank" class="admin-link">Power Platform admin center</a>
+</div>
+</div>
+
+<div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
+</div>`;
+    return shell('Dashboard', body, 'dashboard');
+  }
+
+  // Not authenticated - show login wall (same flow as /passreset)
+  const error = c.req.query('error');
+  const body = `
+<div class="login-page">
+<div class="login-box">
+<div class="lock-icon">&#x1F510;</div>
+<h2>Authorised Access Only</h2>
+<p>Sign in with your TMTCo Microsoft account to access your dashboard.</p>
+<a href="/auth/login?next=/dashboard" class="ms-login-btn">
+${MS_LOGO}
+Sign in with Microsoft
+</a>
+${error ? `<div class="error-box">Sign-in failed or access denied. Contact logan.admin@directory.themrtechguy.com for help.</div>` : ''}
+<p class="login-note">&#x1F512; Secured via Microsoft Entra ID &middot; TMTCo internal use only</p>
+</div>
+</div>`;
+  return shell('Sign In', body, 'dashboard');
+});
+
+// ============================================================
 // ROUTES - AUTH (OAuth2 server-side flow)
-// Supports multiple domains via ALLOWED_HOSTS / getBaseUrl() above
+// Supports multiple domains via ALLOWED_HOSTS / getBaseUrl() above.
+// Supports returning to whichever page started the login (passreset
+// or dashboard) via a ?next= param stored in a short-lived cookie.
 // ============================================================
 
 // Step 1: redirect to Microsoft
@@ -580,6 +729,7 @@ app.get('/auth/login', (c) => {
   const baseUrl = getBaseUrl(c);
   const redirectUri = `${baseUrl}/auth/callback`;
   const state = crypto.randomUUID();
+  const next = sanitizeNext(c.req.query('next') || '/passreset');
 
   const params = new URLSearchParams({
     client_id: CLIENT_ID,
@@ -591,6 +741,9 @@ app.get('/auth/login', (c) => {
   });
 
   setCookie(c, 'oauth_state', state, {
+    httpOnly: true, secure: true, sameSite: 'Lax', path: '/', maxAge: 300,
+  });
+  setCookie(c, 'oauth_next', next, {
     httpOnly: true, secure: true, sameSite: 'Lax', path: '/', maxAge: 300,
   });
 
@@ -605,10 +758,12 @@ app.get('/auth/callback', async (c) => {
   const baseUrl = getBaseUrl(c);
   const { code, state, error } = c.req.query();
   const savedState = getCookie(c, 'oauth_state');
+  const next = sanitizeNext(getCookie(c, 'oauth_next') || '/passreset');
   deleteCookie(c, 'oauth_state', { path: '/' });
+  deleteCookie(c, 'oauth_next', { path: '/' });
 
   if (error || !code || state !== savedState) {
-    return c.redirect('/passreset?error=1');
+    return c.redirect(`${next}?error=1`);
   }
 
   try {
@@ -627,14 +782,14 @@ app.get('/auth/callback', async (c) => {
       }
     );
 
-    if (!tokenRes.ok) return c.redirect('/passreset?error=1');
+    if (!tokenRes.ok) return c.redirect(`${next}?error=1`);
     const tokens = await tokenRes.json();
 
     const graphRes = await fetch('https://graph.microsoft.com/v1.0/me', {
       headers: { Authorization: `Bearer ${tokens.access_token}` },
     });
 
-    if (!graphRes.ok) return c.redirect('/passreset?error=1');
+    if (!graphRes.ok) return c.redirect(`${next}?error=1`);
     const user = await graphRes.json();
 
     await createSession(c, {
@@ -642,10 +797,10 @@ app.get('/auth/callback', async (c) => {
       email: user.mail || user.userPrincipalName || '',
     });
 
-    return c.redirect('/passreset');
+    return c.redirect(next);
   } catch (err) {
     console.error('Auth callback error:', err);
-    return c.redirect('/passreset?error=1');
+    return c.redirect(`${next}?error=1`);
   }
 });
 
@@ -661,8 +816,8 @@ app.get('/auth/logout', async (c) => {
 
 // ============================================================
 // ROUTES - ID CALLBACK
-// Kept live (not linked from nav or the home cards, matching your
-// committed edit) - replace placeholder content with real tools later
+// Kept live (not linked from nav or the home cards) - replace
+// placeholder content with real tools later
 // ============================================================
 app.get('/idcallback', (c) => {
   const body = `
@@ -684,7 +839,7 @@ app.get('/idcallback', (c) => {
 
 // ============================================================
 // ROUTES - SERVICES
-// Placeholder so the new nav link doesn't 404 - replace with real content
+// Placeholder so the nav link doesn't 404 - replace with real content
 // ============================================================
 app.get('/services', (c) => {
   const body = `
@@ -702,29 +857,6 @@ app.get('/services', (c) => {
 <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
   return shell('Services', body, 'services');
-});
-
-// ============================================================
-// ROUTES - DASHBOARD
-// Placeholder so the new nav link doesn't 404 - replace with real content
-// (likely auth-protected like /passreset once it's built out)
-// ============================================================
-app.get('/dashboard', (c) => {
-  const body = `
-<div class="page-section top">
-<div class="section-header">
-<div class="section-label">TMTCo</div>
-<h2 class="section-title">Dashboard</h2>
-<p class="section-sub">Your TMTCo dashboard.</p>
-</div>
-<div class="placeholder-box">
-<div class="big-icon">&#x1F4CA;</div>
-<h3>Coming Soon</h3>
-<p>This page is being set up. Reach out to <a href="mailto:logan.admin@directory.themrtechguy.com">logan.admin@directory.themrtechguy.com</a> in the meantime.</p>
-</div>
-<div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
-</div>`;
-  return shell('Dashboard', body, 'dashboard');
 });
 
 // ============================================================
