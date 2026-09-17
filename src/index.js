@@ -851,7 +851,7 @@ app.get('/services', (c) => {
 <div class="placeholder-box">
 
 <a href="https://themrtechguy.com/spo" target="_blank" class="card">
-<div class="card-icon">U+1F3B5</div>
+<div class="card-icon">&#127925;</div>
 <h3>Spotify</h3>
 <p>Access the TMTCo Spotify page.</p>
 <span class="card-link">Open OneDrive &rarr;</span>
