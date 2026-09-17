@@ -332,13 +332,7 @@ ${body}
 </footer>
 
 <!-- Microsoft Teams Chat Bot - appears on every page -->
-<script
-  type="text/javascript"
-  src="https://res.public.onecdn.static.microsoft/customerconnect/v1/7dttl/init.js"
-  id="chatbot"
-  environmentId="297d0232-29c4-ec49-9042-fe149dab0bc9"
-  crossorigin="anonymous">
-</script>
+
 </body>
 </html>`;
 
@@ -1031,14 +1025,14 @@ app.get('/contact', (c) => {
 <div class="contact-item-icon">&#x2709;&#xFE0F;</div>
 <div>
 <span>Email</span>
-<strong><a href="mailto:logan.admin@tmtcoau.com" style="color:var(--text)">logan.admin@tmtcoau.com</a></strong>
+<strong><a href="mailto:logan.kelly@tmtcoau.com" style="color:var(--text)">logan.kelly@tmtcoau.com</a></strong>
 </div>
 </div>
 <div class="contact-item">
 <div class="contact-item-icon">&#x1F310;</div>
 <div>
 <span>Website</span>
-<strong>themrtechguy.com</strong>
+<strong>tmtcoau.com</strong>
 </div>
 </div>
 <!-- Add more contact items here -->
