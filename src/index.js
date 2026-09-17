@@ -849,11 +849,9 @@ app.get('/services', (c) => {
 <p>This page is being set up. Reach out to <a href="mailto:logan.kelly@tmtcoau.com">logan.kelly@tmtcoau.com</a> in the meantime.</p>
 </div>
 <div class="placeholder-box">
-<span class="material-symbols-outlined">
-music_note
-</span>
+
 <a href="https://themrtechguy.com/spo" target="_blank" class="card">
-<div class="card-icon">&#x1F4C1;</div>
+<div class="card-icon">U+1F3B5</div>
 <h3>Spotify</h3>
 <p>Access the TMTCo Spotify page.</p>
 <span class="card-link">Open OneDrive &rarr;</span>
