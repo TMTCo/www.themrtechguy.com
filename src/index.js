@@ -849,7 +849,9 @@ app.get('/services', (c) => {
 <p>This page is being set up. Reach out to <a href="mailto:logan.kelly@tmtcoau.com">logan.kelly@tmtcoau.com</a> in the meantime.</p>
 </div>
 <div class="placeholder-box">
-<div class="big-icon">&#x1F6E0;&#xFE0F;</div>
+<span class="material-symbols-outlined">
+music_note
+</span>
 <a href="https://themrtechguy.com/spo" target="_blank" class="card">
 <div class="card-icon">&#x1F4C1;</div>
 <h3>Spotify</h3>
@@ -858,7 +860,7 @@ app.get('/services', (c) => {
 </a>
 <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>
-</div>
+
 
 </div>`;
   return shell('Services', body, 'services');
