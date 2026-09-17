@@ -1031,7 +1031,7 @@ app.get('/contact', (c) => {
 <div class="contact-item-icon">&#x2709;&#xFE0F;</div>
 <div>
 <span>Email</span>
-<strong><a href="mailto:logan.admin@tmtcoau.com" style="color:var(--text)">logan.admin@directory.themrtechguy.com</a></strong>
+<strong><a href="mailto:logan.admin@tmtcoau.com" style="color:var(--text)">logan.admin@tmtcoau.com</a></strong>
 </div>
 </div>
 <div class="contact-item">
