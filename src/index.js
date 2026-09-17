@@ -417,8 +417,7 @@ app.get('/', (c) => {
   const body = `
 <div class="hero">
 <div class="hero-badge">&#x26A1; Tech Solutions &amp; IT Support</div>
-<h1>Welcome to<br><span>Themrtechguy.com</span></h1>
-<h1>and<br>tmtcoau.com<span></span></h1>
+<h1>Welcome to<br><span>TMTCoau.com</span></h1>
 <p>Your go-to hub for IT services, tech resources, and all things technology &mdash; backed by TMTCo.</p>
 <div class="hero-ctas">
 <a href="/tech" class="btn btn-primary">Explore Services</a>
