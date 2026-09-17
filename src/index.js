@@ -846,8 +846,14 @@ app.get('/services', (c) => {
 <div class="placeholder-box">
 <div class="big-icon">&#x1F6E0;&#xFE0F;</div>
 <h3>Coming Soon</h3>
-<p>This page is being set up. Reach out to <a href="mailto:logan.admin@directory.themrtechguy.com">logan.admin@directory.themrtechguy.com</a> in the meantime.</p>
+<p>This page is being set up. Reach out to <a href="mailto:logan.kelly@tmtcoau.com">logan.kelly@tmtcoau.com</a> in the meantime.</p>
 </div>
+<a href="https://themrtechguy.com/spo" target="_blank" class="card">
+<div class="card-icon">&#x1F4C1;</div>
+<h3>Spotify</h3>
+<p>Access the TMTCo Spotify page.</p>
+<span class="card-link">Open OneDrive &rarr;</span>
+</a>
 <div class="back-row"><a href="/" class="btn btn-ghost">&larr; Back to Home</a></div>
 </div>`;
   return shell('Services', body, 'services');
