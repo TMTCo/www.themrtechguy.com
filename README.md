@@ -22,7 +22,7 @@ Worker → **Settings** → **Variables & Secrets**:
 |------|------|-------|
 | Variable | `TENANT_ID` | `f1011f75-0d96-4d08-b8d4-6c79c851f9ba` |
 | Variable | `CLIENT_ID` | `db8b6556-cec8-4b83-94b1-364cefd24203` |
-| Variable | `BASE_URL` | `https://themrtechguy.com` |
+| Variable | `BASE_URL` | `https://tmtcoau.com` |
 | **Secret** | `CLIENT_SECRET` | *(your Entra app client secret — see below)* |
 
 ### 5. Bind the KV Namespace
