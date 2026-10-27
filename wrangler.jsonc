@@ -1,8 +1,11 @@
 {
-  "name": "tmtco-main-site",
+  "name": "tmtcosite",
   "main": "src/index.js",
   "compatibility_date": "2024-11-01",
   "compatibility_flags": ["nodejs_compat"],
+
+  // Keep variables set in the dashboard (e.g. VC_ISSUER) when deploying.
+  "keep_vars": true,
 
   "kv_namespaces": [
     {
@@ -11,13 +14,71 @@
     }
   ],
 
+  "durable_objects": {
+    "bindings": [
+      { "name": "NATIVE_VC_TXNS", "class_name": "NativeVerifiedIDTransaction" }
+    ]
+  },
+
+  "migrations": [
+    { "tag": "native-vc-v1", "new_sqlite_classes": ["NativeVerifiedIDTransaction"] }
+  ],
+
   "vars": {
+    // ---- Core Entra ID / site config (required) ----
     "TENANT_ID": "f1011f75-0d96-4d08-b8d4-6c79c851f9ba",
     "CLIENT_ID": "db8b6556-cec8-4b83-94b1-364cefd24203",
-    "BASE_URL": "https://www.tmtcoau.com"
+    "BASE_URL": "https://www.tmtcoau.com",
+
+    // ---- Verified ID: issuance + sign-in (all optional) ----
+    // Every value below already has a matching built-in default in
+    // index.js, so you can delete any of these lines and behavior stays
+    // the same. They're listed here so changing them later only needs a
+    // config edit + redeploy, not a code change.
+
+    // Your tenant's Verified ID authority (DID).
+    "VC_AUTHORITY": "did:web:verifiedid.entra.microsoft.com:f1011f75-0d96-4d08-b8d4-6c79c851f9ba:f5674475-f43e-b35b-dcc6-5d3c3efe6441",
+
+    // Contract manifest for the credential being issued.
+    "VC_MANIFEST": "https://verifiedid.did.msidentity.com/v1.0/tenants/f1011f75-0d96-4d08-b8d4-6c79c851f9ba/verifiableCredentials/contracts/4b569048-2a51-8d41-8d64-a27249369c86/manifest",
+
+    // Credential type to issue / accept at sign-in.
+    "VC_TYPE": "VerifiedEmployee",
+
+    // Which claim in the credential holds the person's email/UPN,
+    // used to identify who is signing in via Verified ID.
+    "VC_LOGIN_CLAIM": "mail",
+
+    // How a Verified ID sign-in is handled:
+    //   "direct"       - Scenario C: one-step sign-in, all Graph calls run
+    //                    on the app's own (application-permission) identity.
+    //                    Audit logs attribute actions to the app, not the person.
+    //   "chain_oauth"  - Scenario B: after the credential scan, hands off to a
+    //                    real Microsoft sign-in so actions run as the individual
+    //                    admin. Costs one extra sign-in step.
+    "VC_LOGIN_MODE": "direct"
+
+    // Optional extras - uncomment (and add a comma after VC_LOGIN_MODE above)
+    // only if you need to override the defaults. They fall back to
+    // VC_AUTHORITY / the values above when unset:
+    // "VC_ISSUER": "did:web:...",
+    // "VC_VERIFIER_AUTHORITY": "did:web:...",
+    // "VC_VERIFIER_CLIENT_NAME": "TMTCo Portal"
+  },
+
+  // Turns on Workers Logs so console.error output (Graph errors, etc.)
+  // shows up in the dashboard's Observability tab.
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true
+    }
   }
 
-  // CLIENT_SECRET must remain a Secret set in the Cloudflare dashboard
-  // (Workers & Pages -> your worker -> Settings -> Variables & Secrets)
-  // Never put the client secret in this file.
+  // SECRETS - never put these in this file. Set them in the Cloudflare
+  // dashboard: Workers & Pages -> your worker -> Settings -> Variables &
+  // Secrets -> Add, type "Secret":
+  //   CLIENT_SECRET   - the app registration's client secret
+  //   VC_CALLBACK_KEY - any long random string; authenticates Microsoft's
+  //                     Verified ID callbacks to your callback endpoints
 }
